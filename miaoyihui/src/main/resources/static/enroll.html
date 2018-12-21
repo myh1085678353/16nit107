@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/jquery-3.3.1.js"></script>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+用户名：<input type="text" id="count"><br>
+密码：<input type="password" id="pass"><br>
+确认密码:<input type="password" id="pass1"><br>
+姓名:<input type="text" id="name"><br>
+<button id="submit">注册</button>
+<button id="check">确定</button>
+<script>
+    $(document).ready(function(){
+        $("#check").click(function(){
+            alert($("#count").val()+" "+$("#pass").val());
+        });
+        $("#submit").click(function(){
+            var Userpass = $("#pass").val();
+            var Userpass1 = $("#pass1").val();
+            if(Userpass == Userpass1) {
+                $.post("Enroll", {
+                    count: $("#count").val(),
+                    password: Userpass,
+                    name:$("#name").val()
+                }, function (data) {
+                    if(data == "isExited"){
+                        alert("该用户已经存在，请重新输入");
+                    }else if(data == "success"){
+                        alert("注册成功！");
+                        window.location.href = 'Home.html';
+                    }
+                });
+            }else {
+                alert("两次密码不同！");
+            }
+        });
+    });
+</script>
+</body>
+</html>

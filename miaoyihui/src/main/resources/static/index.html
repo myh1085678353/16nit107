@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/jquery-3.3.1.js"></script>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+用户名：<input type="text" name="name" id="count"></br>
+密码：<input type="password" name="password" id="password"></br>
+<input type="button" id="submit" value="提交">
+<input type="button" id="check" value="确认">
+<a href="enroll.html">注册</a>
+<script>
+    $(document).ready(function(){
+        $("#check").click(function(){
+            console.log($("#count").val()+" "+$("#password").val());
+        });
+
+        $("#submit").click(function(){
+            $.post("Login",{
+                count:$("#count").val(),
+                password:$("#password").val()
+            },function(data){
+                 // var data = eval("("+data+")");
+                console.log(data);
+                if(data.name != null){
+                    window.location.href = 'Home.html';
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
